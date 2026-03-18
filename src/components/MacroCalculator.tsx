@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Calculator } from 'lucide-react'
 
 const ACTIVITY = [
@@ -14,8 +14,24 @@ const GOALS = [
   { label: 'Gain muscle', modifier: 250 },
 ]
 
+interface FormState {
+  age: number | string
+  weight: number | string
+  height: number | string
+  sex: string
+  activity: number
+  goal: number
+}
+
+interface Results {
+  calories: number
+  fat: number
+  protein: number
+  carbs: number
+}
+
 export default function MacroCalculator() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormState>({
     age: 30,
     weight: 80,
     height: 175,
@@ -23,13 +39,13 @@ export default function MacroCalculator() {
     activity: 1,
     goal: 0,
   })
-  const [results, setResults] = useState(null)
+  const [results, setResults] = useState<Results | null>(null)
 
-  const set = (field, value) => setForm(f => ({ ...f, [field]: value }))
+  const set = (field: keyof FormState, value: string | number) =>
+    setForm(f => ({ ...f, [field]: value }))
 
   const calculate = () => {
     const { age, weight, height, sex, activity, goal } = form
-    // Mifflin–St Jeor BMR
     const bmr =
       sex === 'male'
         ? 10 * Number(weight) + 6.25 * Number(height) - 5 * Number(age) + 5
@@ -38,7 +54,6 @@ export default function MacroCalculator() {
     const tdee = bmr * ACTIVITY[activity].factor + GOALS[goal].modifier
     const calories = Math.round(tdee)
 
-    // Standard keto macros: 70% fat, 25% protein, 5% carbs
     const fat = Math.round((calories * 0.70) / 9)
     const protein = Math.round((calories * 0.25) / 4)
     const carbs = Math.round((calories * 0.05) / 4)
@@ -64,7 +79,7 @@ export default function MacroCalculator() {
             <Field label="Age" unit="years">
               <input
                 type="number"
-                value={form.age}
+                value={form.age as number}
                 onChange={e => set('age', e.target.value)}
                 className="input-dark"
                 min={15} max={100}
@@ -73,7 +88,7 @@ export default function MacroCalculator() {
             <Field label="Weight" unit="kg">
               <input
                 type="number"
-                value={form.weight}
+                value={form.weight as number}
                 onChange={e => set('weight', e.target.value)}
                 className="input-dark"
                 min={30} max={300}
@@ -82,7 +97,7 @@ export default function MacroCalculator() {
             <Field label="Height" unit="cm">
               <input
                 type="number"
-                value={form.height}
+                value={form.height as number}
                 onChange={e => set('height', e.target.value)}
                 className="input-dark"
                 min={100} max={250}
@@ -180,7 +195,14 @@ export default function MacroCalculator() {
   )
 }
 
-function Field({ label, unit, className = '', children }) {
+interface FieldProps {
+  label: string
+  unit?: string
+  className?: string
+  children: ReactNode
+}
+
+function Field({ label, unit, className = '', children }: FieldProps) {
   return (
     <div className={className}>
       <label className="block text-xs font-mono text-white/40 uppercase tracking-wider mb-2">
@@ -191,7 +213,14 @@ function Field({ label, unit, className = '', children }) {
   )
 }
 
-function ResultCard({ label, value, unit, accent }) {
+interface ResultCardProps {
+  label: string
+  value: number
+  unit: string
+  accent?: boolean
+}
+
+function ResultCard({ label, value, unit, accent }: ResultCardProps) {
   return (
     <div className={`rounded-2xl p-4 text-center ${accent ? 'bg-brand-600' : 'bg-white/5 border border-white/10'}`}>
       <p className={`font-display text-2xl font-black ${accent ? 'text-white' : 'text-brand-400'}`}>

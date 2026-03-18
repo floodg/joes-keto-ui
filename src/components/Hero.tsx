@@ -97,7 +97,14 @@ export default function Hero() {
   )
 }
 
-function FoodCard({ emoji, name, macros, className = '' }) {
+interface FoodCardProps {
+  emoji: string
+  name: string
+  macros: { fat: number; protein: number; carbs: number }
+  className?: string
+}
+
+function FoodCard({ emoji, name, macros, className = '' }: FoodCardProps) {
   return (
     <div className={`card p-4 ${className}`}>
       <div className="text-4xl mb-3">{emoji}</div>
@@ -111,7 +118,13 @@ function FoodCard({ emoji, name, macros, className = '' }) {
   )
 }
 
-function MacroPill({ label, value, color }) {
+interface MacroPillProps {
+  label: string
+  value: string
+  color: string
+}
+
+function MacroPill({ label, value, color }: MacroPillProps) {
   return (
     <div className="flex items-center gap-1.5">
       <span className={`w-2 h-2 rounded-full ${color}`} />

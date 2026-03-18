@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 
-// Public site components (JSX — keep as-is, they're not being migrated)
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Recipes from './components/Recipes'
@@ -15,7 +14,8 @@ import AppShell from './app/AppShell'
 import Dashboard from './app/Dashboard'
 import WeeklyPlan from './app/WeeklyPlan'
 import MealsPage from './app/MealsPage'
-import { ShoppingPage, WorkoutsPage, MacrosPage } from './app/StubPages'
+import ShoppingListPage from './app/ShoppingListPage'
+import { WorkoutsPage, MacrosPage } from './app/StubPages'
 
 function PublicSite() {
   return (
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'plan',      element: <WeeklyPlan /> },
       { path: 'meals',     element: <MealsPage /> },
-      { path: 'shopping',  element: <ShoppingPage /> },
+      { path: 'shopping',  element: <ShoppingListPage /> },
       { path: 'workouts',  element: <WorkoutsPage /> },
       { path: 'macros',    element: <MacrosPage /> },
     ],

@@ -1,9 +1,9 @@
 import { Flame } from 'lucide-react'
 
-const links = {
+const links: Record<string, string[]> = {
   Recipes: ['Breakfast', 'Lunch', 'Dinner', 'Snacks', 'Desserts'],
   Tools: ['Macro Calculator', '7-Day Plan', 'Shopping List', 'Keto Guide'],
-  About: ['Joe\'s Story', 'Blog', 'Contact', 'Press'],
+  About: ["Joe's Story", 'Blog', 'Contact', 'Press'],
 }
 
 export default function Footer() {

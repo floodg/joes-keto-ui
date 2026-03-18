@@ -1,6 +1,16 @@
 import { Clock, Flame, ChevronRight } from 'lucide-react'
 
-const recipes = [
+interface Recipe {
+  emoji: string
+  title: string
+  time: string
+  calories: number
+  macros: { fat: number; protein: number; carbs: number }
+  tag: string
+  tagColor: string
+}
+
+const recipes: Recipe[] = [
   {
     emoji: '🥑',
     title: 'Smashed Avocado Egg Bowl',
@@ -85,7 +95,7 @@ export default function Recipes() {
   )
 }
 
-function RecipeCard({ recipe }) {
+function RecipeCard({ recipe }: { recipe: Recipe }) {
   const { emoji, title, time, calories, macros, tag, tagColor } = recipe
 
   return (
@@ -123,7 +133,15 @@ function RecipeCard({ recipe }) {
   )
 }
 
-function MacroBar({ label, value, max, color, unit }) {
+interface MacroBarProps {
+  label: string
+  value: number
+  max: number
+  color: string
+  unit: string
+}
+
+function MacroBar({ label, value, max, color, unit }: MacroBarProps) {
   const pct = Math.min(100, (value / max) * 100)
   return (
     <div className="flex items-center gap-2">
