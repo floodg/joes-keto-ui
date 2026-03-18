@@ -26,7 +26,8 @@ const NAV: NavSection[] = [
     section: 'Food',
     links: [
       { to: '/app/meals',    icon: '🍽️', label: 'Meals' },
-      { to: '/app/shopping', icon: '🛒', label: 'Shopping' },
+      { to: '/app/shopping', icon: '🛒', label: 'Shopping List' },
+      { to: '/app/shopping-trips', icon: '🛒', label: 'Shopping Trips' },
     ],
   },
   {
@@ -43,6 +44,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/app/plan':      'Weekly Plan',
   '/app/meals':     'My Meals',
   '/app/shopping':  'Shopping List',
+  '/app/shopping-trips': 'Shopping Trips',
   '/app/workouts':  'Workouts',
   '/app/macros':    'My Macros',
 }

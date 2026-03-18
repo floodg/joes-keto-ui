@@ -15,6 +15,7 @@ import Dashboard from './app/Dashboard'
 import WeeklyPlan from './app/WeeklyPlan'
 import MealsPage from './app/MealsPage'
 import ShoppingListPage from './app/ShoppingListPage'
+import ShoppingTripsPage from './app/ShoppingTripsPage'
 import { WorkoutsPage, MacrosPage } from './app/StubPages'
 
 function PublicSite() {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: 'plan',      element: <WeeklyPlan /> },
       { path: 'meals',     element: <MealsPage /> },
       { path: 'shopping',  element: <ShoppingListPage /> },
+      { path: 'shopping-trips', element: <ShoppingTripsPage /> },
       { path: 'workouts',  element: <WorkoutsPage /> },
       { path: 'macros',    element: <MacrosPage /> },
     ],
