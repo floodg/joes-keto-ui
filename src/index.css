@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50:  #fdf6ec;
+  --color-brand-100: #fae8cc;
+  --color-brand-200: #f5cc8f;
+  --color-brand-300: #efaa52;
+  --color-brand-400: #e88e28;
+  --color-brand-500: #d97416;
+  --color-brand-600: #b85a10;
+  --color-brand-700: #8f420f;
+  --color-brand-800: #763614;
+  --color-brand-900: #632e14;
+  --color-cream:     #fdf8f2;
+  --color-charcoal:  #1c1a17;
+  --background-color-cream: #fdf8f2;
+  --text-color-charcoal: #1c1a17;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans:    "DM Sans", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", monospace;
+
+  --animate-fade-up: fadeUp 0.6s ease both;
+  --animate-fade-in: fadeIn 0.4s ease both;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-charcoal font-sans antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700
+           text-white font-sans font-medium px-6 py-3 rounded-full
+           transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5
+           active:translate-y-0 active:shadow-none;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border border-brand-600 text-brand-700
+           hover:bg-brand-50 font-sans font-medium px-6 py-3 rounded-full
+           transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden;
+  }
+
+  .section-label {
+    @apply text-xs font-mono font-medium tracking-[0.2em] uppercase text-brand-500;
+  }
+
+  .macro-badge {
+    @apply text-xs font-mono font-medium px-2 py-0.5 rounded-full;
+  }
+}
+
+@layer utilities {
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Noise texture overlay */
+.noise-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 9999;
+}
